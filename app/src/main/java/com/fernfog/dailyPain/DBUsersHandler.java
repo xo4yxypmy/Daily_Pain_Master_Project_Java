@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Debug;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -43,6 +46,29 @@ public class DBUsersHandler extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return hasUsers;
+    }
+
+    public void listUsers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM users";
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                int userId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String userName = cursor.getString(cursor.getColumnIndexOrThrow("first_name"));
+
+                Log.e("USER ID", "userId: " + userId);
+                Log.e("USER NAME", "userName: " + userName);
+
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+
+        cursor.close();
+        db.close();
     }
 
     public static boolean checkDatabaseExists(Context context) {
