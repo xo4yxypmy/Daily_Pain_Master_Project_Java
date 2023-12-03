@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="MyOutlinedBox" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/my_blue</item>
+        <item name="hintTextAppearance">@style/MyHintAppearance</item>
+        <item name="hintTextColor">@color/m3_textfield_label_color_focused</item>
+    </style>
+
+    <style name="MyHintAppearance" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>
