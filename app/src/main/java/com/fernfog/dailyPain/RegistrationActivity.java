@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -52,9 +51,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
                 if (!firstNameT.isEmpty() && !lastNameT.isEmpty() && !patronymicT.isEmpty() && birth != null) {
-                    DBUsersHandler dbUsersHandler = new DBUsersHandler(RegistrationActivity.this);
+                    DBHandler dbHandler = new DBHandler(RegistrationActivity.this);
 
-                    dbUsersHandler.addNewUser(firstNameT, lastNameT, patronymicT, birth);
+                    dbHandler.addNewUser(firstNameT, lastNameT, patronymicT, birth);
                     Toast.makeText(RegistrationActivity.this, "Обліковий запис створено", Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);

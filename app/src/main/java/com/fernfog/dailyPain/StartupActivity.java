@@ -1,8 +1,6 @@
 package com.fernfog.dailyPain;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +12,9 @@ public class StartupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
 
-        DBUsersHandler dbUsersHandler = new DBUsersHandler(this);
+        DBHandler dbHandler = new DBHandler(this);
 
-        if (dbUsersHandler.checkDatabaseExists(this) && dbUsersHandler.hasUsers()) {
+        if (dbHandler.checkDatabaseExists(this) && dbHandler.hasUsers()) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
