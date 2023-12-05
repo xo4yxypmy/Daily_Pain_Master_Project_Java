@@ -95,7 +95,7 @@ public class AddSymptomDialog extends Dialog {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                endOfPain = dayOfMonth + " " + month + " " + year;
+                endOfPain = dayOfMonth + "/" + month + "/" + year;
             }
         };
 
@@ -110,7 +110,7 @@ public class AddSymptomDialog extends Dialog {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                startOfPain = dayOfMonth + " " + month + " " + year;
+                startOfPain = dayOfMonth + "/" + month + "/" + year;
             }
         };
 

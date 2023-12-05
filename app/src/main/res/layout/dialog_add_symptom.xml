@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
 
         android:text="текст категорії"
+        android:textAlignment="center"
 
         android:textSize="30dp"
 

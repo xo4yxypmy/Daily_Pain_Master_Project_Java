@@ -79,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                birth = dayOfMonth + " " + month + " " + year;
+                birth = dayOfMonth + "/" + month + "/" + year;
             }
         };
 

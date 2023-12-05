@@ -1,6 +1,7 @@
 package com.fernfog.dailyPain;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,9 +11,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.fernfog.dailyPain.objects.SymptomCategory;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
@@ -52,6 +55,7 @@ public class AddSymptomCategoryFragment extends Fragment {
                     800,
                     ViewGroup.LayoutParams.WRAP_CONTENT
             );
+
             cardViewParams.setMargins(0, 16, 0, 16);
             cardView.setLayoutParams(cardViewParams);
             cardView.setRadius(8);
@@ -69,8 +73,13 @@ public class AddSymptomCategoryFragment extends Fragment {
 
 
             Button buttonOpenAdd = new Button(view.getContext());
+            buttonOpenAdd.setBackgroundColor(Color.parseColor("#00FFFFFF"));
             buttonOpenAdd.setText(category.getName());
             buttonOpenAdd.setTextColor(Color.parseColor("#" + category.getColor()));
+
+            Typeface customFont = ResourcesCompat.getFont(getContext(), R.font.montserrat);
+
+            buttonOpenAdd.setTypeface(customFont);
 
             buttonOpenAdd.setGravity(Gravity.CENTER);
 
@@ -89,7 +98,6 @@ public class AddSymptomCategoryFragment extends Fragment {
 
             scrollView.addView(cardView);
         }
-
 
         return view;
     }

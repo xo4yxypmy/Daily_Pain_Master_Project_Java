@@ -184,6 +184,70 @@ public class DBHandler extends SQLiteOpenHelper {
         return hasUsers;
     }
 
+    public int getSymptomId(float painLVL, String categoryName, String startOfPain, String endOfPain) {
+        int symptomId = -1;
+
+        try (SQLiteDatabase db = this.getReadableDatabase()) {
+            int categoryId = getCategoryIdByName(categoryName, db);
+
+            String query = "SELECT id FROM symptoms WHERE categoryId = ? AND painLVL = ? AND startOfPain = ? AND endOfPain = ?";
+            try (Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(categoryId), String.valueOf(painLVL), startOfPain, endOfPain})) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    symptomId = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return symptomId;
+    }
+
+    public void deleteSymptom(int symptomId) {
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
+            db.delete("symptoms", "id = ?", new String[]{String.valueOf(symptomId)});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCategory(String categoryName) {
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
+            int categoryId = getCategoryIdByName(categoryName, db);
+
+            // Delete symptoms associated with the category
+            db.delete("symptoms", "categoryId = ?", new String[]{String.valueOf(categoryId)});
+
+            // Delete the category
+            db.delete("symptomeCategories", "nameOfSymptomCategory = ?", new String[]{categoryName});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public String getCategoryColorByName(String categoryName) {
+        String color = "000000";
+
+        try (SQLiteDatabase db = this.getReadableDatabase()) {
+            String query = "SELECT colorOfSymptomCategory FROM symptomeCategories WHERE nameOfSymptomCategory = ?";
+            try (Cursor cursor = db.rawQuery(query, new String[]{categoryName})) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    color = cursor.getString(cursor.getColumnIndexOrThrow("colorOfSymptomCategory"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return color;
+    }
+
+
     public static boolean checkDatabaseExists(Context context) {
         File dbFile = context.getDatabasePath("myDataBase");
         return dbFile.exists();
