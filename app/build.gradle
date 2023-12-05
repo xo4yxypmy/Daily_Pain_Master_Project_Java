@@ -29,7 +29,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.yukuku:ambilwarna:2.0.1'
     implementation "com.github.skydoves:colorpickerview:2.3.0"
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
