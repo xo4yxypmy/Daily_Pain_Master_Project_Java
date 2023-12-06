@@ -12,8 +12,10 @@
     <string name="create_category_field">Ваша назва...</string>
     <string name="submitCategoryButtonText">Додати категорію</string>
     <string name="createCategoryButton">Створити категорію</string>
-    <string name="setStartDateButton">Початок</string>
-    <string name="setEndDateButton">Кінець</string>
+    <string name="setStartDateButton">Початок (дата)</string>
+    <string name="setEndDateButton">Кінець (дата)</string>
+    <string name="setEndTimeButton">Кінець (час)</string>
+    <string name="setStartTimeButton">Початок (час)</string>
     <string name="createSymptomButton">Створити запис</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

@@ -81,9 +81,20 @@ public class SymptomListFragment extends Fragment {
             textViewName.setTextColor(Color.parseColor("#" + dbHandler.getCategoryColorByName(symptome.getNameOfCategory())));
 
             TextView textViewStart = new TextView(getContext());
-            textViewStart.setText(symptome.getStartOfPain());
+            textViewStart.setText(String.valueOf(symptome.getPainLvl()));
 
             textViewStart.setLayoutParams(layoutParams);
+
+
+            TextView textViewStartTime = new TextView(getContext());
+            textViewStartTime.setText(String.valueOf(symptome.getStartOfPainTime()));
+
+            textViewStartTime.setLayoutParams(layoutParams);
+
+            TextView textViewEndTime = new TextView(getContext());
+            textViewEndTime.setText(String.valueOf(symptome.getEndOfPainTime()));
+
+            textViewEndTime.setLayoutParams(layoutParams);
 
 
             TextView textViewLvl = new TextView(getContext());
@@ -110,6 +121,8 @@ public class SymptomListFragment extends Fragment {
             cardContentLayout.addView(textViewName);
             cardContentLayout.addView(textViewStart);
             cardContentLayout.addView(textViewLvl);
+            cardContentLayout.addView(textViewStartTime);
+            cardContentLayout.addView(textViewEndTime);
 
             textViewName.setGravity(Gravity.CENTER);
             textViewStart.setGravity(Gravity.CENTER);
@@ -120,7 +133,7 @@ public class SymptomListFragment extends Fragment {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int id = dbHandler.getSymptomId(symptome.getPainLvl(), symptome.getNameOfCategory(), symptome.getStartOfPain(), symptome.getEndOfPain());
+                    int id = dbHandler.getSymptomId(symptome.getPainLvl(), symptome.getNameOfCategory(), symptome.getStartOfPainDate(), symptome.getEndOfPainDate());
 
                     dbHandler.deleteSymptom(id);
                 }

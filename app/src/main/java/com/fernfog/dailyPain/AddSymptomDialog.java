@@ -3,6 +3,7 @@ package com.fernfog.dailyPain;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,11 +31,14 @@ public class AddSymptomDialog extends Dialog {
     String startOfPain;
     String endOfPain;
 
+    String startOfPainTime;
+    String endOfPainTime;
+
     public String category;
     public String color;
 
     Slider slider;
-    Button startOfPainButton, endOfPainButton, createSymptomButton;
+    Button startOfPainButton, endOfPainButton, createSymptomButton, startOfPainTimeButton, endOfPainTimeButton;
     TextView textView;
 
     public AddSymptomDialog(@NonNull Context context, String category, String color) {
@@ -59,6 +64,9 @@ public class AddSymptomDialog extends Dialog {
         startOfPainButton = findViewById(R.id.setStartDateButton);
         endOfPainButton = findViewById(R.id.setEndDateButton);
         createSymptomButton = findViewById(R.id.createCategoryButton);
+        endOfPainTimeButton = findViewById(R.id.setEndTimeButton);
+        startOfPainTimeButton = findViewById(R.id.setStartTimeButton);
+
 
         slider = findViewById(R.id.painSlider);
 
@@ -68,7 +76,7 @@ public class AddSymptomDialog extends Dialog {
                 DBHandler dbHandler = new DBHandler(getContext());
 
                 if (startOfPain != null && endOfPain != null) {
-                    dbHandler.addNewSymptom(slider.getValue(), category, startOfPain, endOfPain);
+                    dbHandler.addNewSymptom(slider.getValue(), category, startOfPain, endOfPain, startOfPainTime, endOfPainTime);
                     Toast.makeText(getContext(), "Симптому додано!", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "Не заповнено обов'язкове поле", Toast.LENGTH_LONG).show();
@@ -87,6 +95,20 @@ public class AddSymptomDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 openDatePickerEnd();
+            }
+        });
+
+        endOfPainTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTimePickerEnd();
+            }
+        });
+
+        startOfPainTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openTimePickerStart();
             }
         });
     }
@@ -120,4 +142,49 @@ public class AddSymptomDialog extends Dialog {
 
         datePickerDialogStart.show();
     }
+
+    public void openTimePickerStart() {
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                startOfPainTime = hourOfDay + ":" + minute;
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+
+        TimePickerDialog timePickerDialogStart = new TimePickerDialog(
+                getContext(),
+                AlertDialog.THEME_HOLO_DARK,
+                timeSetListener,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+        );
+
+        timePickerDialogStart.show();
+    }
+
+    public void openTimePickerEnd() {
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                endOfPainTime = hourOfDay + ":" + minute;
+            }
+        };
+
+        Calendar calendar = Calendar.getInstance();
+
+        TimePickerDialog timePickerDialogStart = new TimePickerDialog(
+                getContext(),
+                AlertDialog.THEME_HOLO_DARK,
+                timeSetListener,
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+        );
+
+        timePickerDialogStart.show();
+    }
+
 }

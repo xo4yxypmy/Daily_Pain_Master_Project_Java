@@ -17,14 +17,14 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
 
     public DBHandler(Context context) {
-        super(context, "myDataBase", null, 3);
+        super(context, "myDataBase", null, 4);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String queryUsers = "CREATE TABLE users (id INT PRIMARY KEY, first_name TEXT, last_name TEXT, patronymic TEXT, birthday TEXT)";
         String querySymptomCategories = "CREATE TABLE symptomeCategories (id INT PRIMARY KEY, nameOfSymptomCategory TEXT, colorOfSymptomCategory TEXT)";
-        String querySymptoms = "CREATE TABLE symptoms (id INTEGER PRIMARY KEY, painLVL FLOAT, categoryId INTEGER, nameOfCategory TEXT, startOfPain TEXT, endOfPain TEXT)";
+        String querySymptoms = "CREATE TABLE symptoms (id INTEGER PRIMARY KEY, painLVL FLOAT, categoryId INTEGER, nameOfCategory TEXT, startOfPain TEXT, endOfPain TEXT, startTime TEXT, endTime TEXT)";
 
         db.execSQL(queryUsers);
         db.execSQL(querySymptomCategories);
@@ -59,7 +59,7 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    public void addNewSymptom(float painLVL, String categoryName, String startOfPain, String endOfPain) {
+    public void addNewSymptom(float painLVL, String categoryName, String startOfPain, String endOfPain, String startTime, String endTime) {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             int categoryId = getCategoryIdByName(categoryName, db);
 
@@ -68,6 +68,8 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put("painLVL", painLVL);
             values.put("startOfPain", startOfPain);
             values.put("endOfPain", endOfPain);
+            values.put("startTime", startTime);
+            values.put("endTime", endTime);
             values.put("nameOfCategory", categoryName);
 
             db.insert("symptoms", null, values);
@@ -87,9 +89,11 @@ public class DBHandler extends SQLiteOpenHelper {
                         float painLVL = cursor.getFloat(cursor.getColumnIndexOrThrow("painLVL"));
                         String startOfPain = cursor.getString(cursor.getColumnIndexOrThrow("startOfPain"));
                         String endOfPain = cursor.getString(cursor.getColumnIndexOrThrow("endOfPain"));
+                        String startTime = cursor.getString(cursor.getColumnIndexOrThrow("startTime"));
+                        String endTime = cursor.getString(cursor.getColumnIndexOrThrow("endTime"));
                         String nameOfCategory = cursor.getString(cursor.getColumnIndexOrThrow("nameOfCategory"));
 
-                        Symptome category = new Symptome(startOfPain, endOfPain, nameOfCategory, painLVL);
+                        Symptome category = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL);
                         symptomes.add(category);
                     } while (cursor.moveToNext());
                 }

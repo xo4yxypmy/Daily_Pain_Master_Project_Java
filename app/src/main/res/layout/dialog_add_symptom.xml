@@ -31,8 +31,32 @@
 
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/setStartDateButton"
+        app:layout_constraintBottom_toTopOf="@id/setStartTimeButton"
         app:layout_constraintTop_toBottomOf="@+id/textOfCategory" />
+
+    <Button
+        android:id="@+id/setStartTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/painSlider"
+        app:layout_constraintBottom_toTopOf="@id/setEndTimeButton"
+
+        android:text="@string/setStartTimeButton" />
+
+    <Button
+        android:id="@+id/setEndTimeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setStartTimeButton"
+        app:layout_constraintBottom_toTopOf="@id/setStartDateButton"
+
+        android:text="@string/setEndTimeButton" />
 
     <Button
         android:id="@+id/setStartDateButton"
@@ -41,8 +65,8 @@
 
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/setEndDateButton"
-        app:layout_constraintTop_toBottomOf="@id/painSlider"
+        app:layout_constraintTop_toBottomOf="@id/setEndTimeButton"
+        app:layout_constraintBottom_toTopOf="@id/setEndDateButton"
 
         android:text="@string/setStartDateButton" />
 
