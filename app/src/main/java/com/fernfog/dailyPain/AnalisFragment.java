@@ -22,7 +22,7 @@ import java.util.List;
 
 public class AnalisFragment extends Fragment {
 
-    TextView all, l10, l9, l8, l7, l6, l5, l4, l3, l2, l1, l0;
+    TextView all;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,31 +42,13 @@ public class AnalisFragment extends Fragment {
         List<Symptome> symptomes = dbHandler.getAllSymptomes();
 
         all = view.findViewById(R.id.all);
-        l10 = view.findViewById(R.id.l10);
-        l9 = view.findViewById(R.id.l9);
-        l8 = view.findViewById(R.id.l8);
-        l7 = view.findViewById(R.id.l7);
-        l6 = view.findViewById(R.id.l6);
-        l5 = view.findViewById(R.id.l5);
-        l4 = view.findViewById(R.id.l4);
-        l3 = view.findViewById(R.id.l3);
-        l2 = view.findViewById(R.id.l2);
-        l1 = view.findViewById(R.id.l1);
-        l0 = view.findViewById(R.id.l0);
 
-        all.setText("Кількість симптомів: " + dbHandler.getAllSymptomes().size());
+        all.setText("Кількість симптомів: " + symptomes.size());
 
-        l0.setText("Кількість 0 рівня: " + dbHandler.getAllSymptomesWithPainLevel(0).size());
-        l1.setText("Кількість 1 рівня: " + dbHandler.getAllSymptomesWithPainLevel(1).size());
-        l2.setText("Кількість 2 рівня: " + dbHandler.getAllSymptomesWithPainLevel(2).size());
-        l3.setText("Кількість 3 рівня: " + dbHandler.getAllSymptomesWithPainLevel(3).size());
-        l4.setText("Кількість 4 рівня: " + dbHandler.getAllSymptomesWithPainLevel(4).size());
-        l5.setText("Кількість 5 рівня: " + dbHandler.getAllSymptomesWithPainLevel(5).size());
-        l6.setText("Кількість 6 рівня: " + dbHandler.getAllSymptomesWithPainLevel(6).size());
-        l7.setText("Кількість 7 рівня: " + dbHandler.getAllSymptomesWithPainLevel(7).size());
-        l8.setText("Кількість 8 рівня: " + dbHandler.getAllSymptomesWithPainLevel(8).size());
-        l9.setText("Кількість 9 рівня: " + dbHandler.getAllSymptomesWithPainLevel(9).size());
-        l10.setText("Кількість 10 рівня: " + dbHandler.getAllSymptomesWithPainLevel(10).size());
+        for (int i = 0; i <= 10; i++) {
+            TextView levelTextView = view.findViewById(getResources().getIdentifier("l" + i, "id", getContext().getPackageName()));
+            levelTextView.setText("Кількість " + i + " рівня: " + dbHandler.getAllSymptomesWithPainLevel(i).size());
+        }
 
         List<Entry> entries = new ArrayList<>();
         for (int i = 0; i < symptomes.size(); i++) {
