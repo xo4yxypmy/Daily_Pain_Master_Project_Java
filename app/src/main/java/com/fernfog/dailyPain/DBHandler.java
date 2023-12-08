@@ -107,6 +107,65 @@ public class DBHandler extends SQLiteOpenHelper {
         return symptomes;
     }
 
+    public List<Symptome> getAllSymptomesInCategory(String categoryName) {
+        List<Symptome> symptomes = new ArrayList<>();
+
+        try (SQLiteDatabase db = this.getReadableDatabase()) {
+            String query = "SELECT * FROM symptoms WHERE nameOfCategory = ?";
+            try (Cursor cursor = db.rawQuery(query, new String[]{categoryName})) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        float painLVL = cursor.getFloat(cursor.getColumnIndexOrThrow("painLVL"));
+                        String startOfPain = cursor.getString(cursor.getColumnIndexOrThrow("startOfPain"));
+                        String endOfPain = cursor.getString(cursor.getColumnIndexOrThrow("endOfPain"));
+                        String startTime = cursor.getString(cursor.getColumnIndexOrThrow("startTime"));
+                        String endTime = cursor.getString(cursor.getColumnIndexOrThrow("endTime"));
+                        String nameOfCategory = cursor.getString(cursor.getColumnIndexOrThrow("nameOfCategory"));
+
+                        Symptome symptome = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL);
+                        symptomes.add(symptome);
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return symptomes;
+    }
+
+    public List<Symptome> getAllSymptomesWithPainLevel(float painLevel) {
+        List<Symptome> symptomes = new ArrayList<>();
+
+        try (SQLiteDatabase db = this.getReadableDatabase()) {
+            String query = "SELECT * FROM symptoms WHERE painLVL = ?";
+            try (Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(painLevel)})) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        float painLVL = cursor.getFloat(cursor.getColumnIndexOrThrow("painLVL"));
+                        String startOfPain = cursor.getString(cursor.getColumnIndexOrThrow("startOfPain"));
+                        String endOfPain = cursor.getString(cursor.getColumnIndexOrThrow("endOfPain"));
+                        String startTime = cursor.getString(cursor.getColumnIndexOrThrow("startTime"));
+                        String endTime = cursor.getString(cursor.getColumnIndexOrThrow("endTime"));
+                        String nameOfCategory = cursor.getString(cursor.getColumnIndexOrThrow("nameOfCategory"));
+
+                        Symptome symptome = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL);
+                        symptomes.add(symptome);
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return symptomes;
+    }
+
+
     private int getCategoryIdByName(String categoryName, SQLiteDatabase db) {
         int categoryId = -1;
 
@@ -120,6 +179,28 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         return categoryId;
+    }
+
+    public SymptomCategory getCategoryById(int categoryId) {
+        SymptomCategory category = null;
+
+        try (SQLiteDatabase db = this.getReadableDatabase()) {
+            String query = "SELECT * FROM symptomeCategories WHERE id = ?";
+            try (Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(categoryId)})) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    String categoryName = cursor.getString(cursor.getColumnIndexOrThrow("nameOfSymptomCategory"));
+                    String categoryColor = cursor.getString(cursor.getColumnIndexOrThrow("colorOfSymptomCategory"));
+
+                    category = new SymptomCategory(categoryName, categoryColor);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return category;
     }
 
     public List<SymptomCategory> getAllCategoriesWithColors() {
@@ -231,7 +312,6 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-
     public String getCategoryColorByName(String categoryName) {
         String color = "000000";
 
@@ -250,7 +330,6 @@ public class DBHandler extends SQLiteOpenHelper {
 
         return color;
     }
-
 
     public static boolean checkDatabaseExists(Context context) {
         File dbFile = context.getDatabasePath("myDataBase");
