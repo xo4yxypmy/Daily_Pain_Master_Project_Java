@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.slider.Slider;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.w3c.dom.Text;
 
@@ -40,6 +41,7 @@ public class AddSymptomDialog extends Dialog {
     Slider slider;
     Button startOfPainButton, endOfPainButton, createSymptomButton, startOfPainTimeButton, endOfPainTimeButton;
     TextView textView;
+    TextInputLayout additional;
 
     public AddSymptomDialog(@NonNull Context context, String category, String color) {
         super(context);
@@ -70,13 +72,21 @@ public class AddSymptomDialog extends Dialog {
 
         slider = findViewById(R.id.painSlider);
 
+        additional = findViewById(R.id.textInputAdditional);
+
         createSymptomButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DBHandler dbHandler = new DBHandler(getContext());
 
+                String additionalText = additional.getEditText().getText().toString().trim();
+
                 if (startOfPain != null && endOfPain != null) {
-                    dbHandler.addNewSymptom(slider.getValue(), category, startOfPain, endOfPain, startOfPainTime, endOfPainTime);
+                    if (additionalText == null) {
+                        additionalText = "";
+                    }
+
+                    dbHandler.addNewSymptom(slider.getValue(), category, startOfPain, endOfPain, startOfPainTime, endOfPainTime , additionalText);
                     Toast.makeText(getContext(), "Симптому додано!", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getContext(), "Не заповнено обов'язкове поле", Toast.LENGTH_LONG).show();

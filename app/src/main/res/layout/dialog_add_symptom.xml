@@ -34,6 +34,22 @@
         app:layout_constraintBottom_toTopOf="@id/setStartTimeButton"
         app:layout_constraintTop_toBottomOf="@+id/textOfCategory" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputAdditional"
+        android:layout_width="358dp"
+        android:layout_height="wrap_content"
+        android:hint="Додатково"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/setStartTimeButton"
+        app:layout_constraintTop_toBottomOf="@+id/painSlider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_patronymic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/setStartTimeButton"
         android:layout_width="wrap_content"
@@ -41,7 +57,7 @@
 
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/painSlider"
+        app:layout_constraintTop_toBottomOf="@id/textInputAdditional"
         app:layout_constraintBottom_toTopOf="@id/setEndTimeButton"
 
         android:text="@string/setStartTimeButton" />

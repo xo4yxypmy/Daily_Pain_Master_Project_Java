@@ -17,14 +17,14 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
 
     public DBHandler(Context context) {
-        super(context, "myDataBase", null, 4);
+        super(context, "myDataBase", null, 5);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String queryUsers = "CREATE TABLE users (id INT PRIMARY KEY, first_name TEXT, last_name TEXT, patronymic TEXT, birthday TEXT)";
         String querySymptomCategories = "CREATE TABLE symptomeCategories (id INT PRIMARY KEY, nameOfSymptomCategory TEXT, colorOfSymptomCategory TEXT)";
-        String querySymptoms = "CREATE TABLE symptoms (id INTEGER PRIMARY KEY, painLVL FLOAT, categoryId INTEGER, nameOfCategory TEXT, startOfPain TEXT, endOfPain TEXT, startTime TEXT, endTime TEXT)";
+        String querySymptoms = "CREATE TABLE symptoms (id INTEGER PRIMARY KEY, painLVL FLOAT, categoryId INTEGER, nameOfCategory TEXT, startOfPain TEXT, endOfPain TEXT, startTime TEXT, endTime TEXT, additional TEXT)";
 
         db.execSQL(queryUsers);
         db.execSQL(querySymptomCategories);
@@ -59,18 +59,19 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    public void addNewSymptom(float painLVL, String categoryName, String startOfPain, String endOfPain, String startTime, String endTime) {
+    public void addNewSymptom(float painLVL, String categoryName, String startOfPain, String endOfPain, String startTime, String endTime, String additional) {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             int categoryId = getCategoryIdByName(categoryName, db);
 
             ContentValues values = new ContentValues();
             values.put("categoryId", categoryId);
-            values.put("painLVL", painLVL);
+            values.put("painLVL", Math.round(painLVL));
             values.put("startOfPain", startOfPain);
             values.put("endOfPain", endOfPain);
             values.put("startTime", startTime);
             values.put("endTime", endTime);
             values.put("nameOfCategory", categoryName);
+            values.put("additional", additional);
 
             db.insert("symptoms", null, values);
         } catch (Exception e) {
@@ -92,8 +93,9 @@ public class DBHandler extends SQLiteOpenHelper {
                         String startTime = cursor.getString(cursor.getColumnIndexOrThrow("startTime"));
                         String endTime = cursor.getString(cursor.getColumnIndexOrThrow("endTime"));
                         String nameOfCategory = cursor.getString(cursor.getColumnIndexOrThrow("nameOfCategory"));
+                        String additional = cursor.getString(cursor.getColumnIndexOrThrow("additional"));
 
-                        Symptome category = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL);
+                        Symptome category = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL, additional);
                         symptomes.add(category);
                     } while (cursor.moveToNext());
                 }
@@ -121,8 +123,9 @@ public class DBHandler extends SQLiteOpenHelper {
                         String startTime = cursor.getString(cursor.getColumnIndexOrThrow("startTime"));
                         String endTime = cursor.getString(cursor.getColumnIndexOrThrow("endTime"));
                         String nameOfCategory = cursor.getString(cursor.getColumnIndexOrThrow("nameOfCategory"));
+                        String additional = cursor.getString(cursor.getColumnIndexOrThrow("additional"));
 
-                        Symptome symptome = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL);
+                        Symptome symptome = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL, additional);
                         symptomes.add(symptome);
                     } while (cursor.moveToNext());
                 }
@@ -150,8 +153,9 @@ public class DBHandler extends SQLiteOpenHelper {
                         String startTime = cursor.getString(cursor.getColumnIndexOrThrow("startTime"));
                         String endTime = cursor.getString(cursor.getColumnIndexOrThrow("endTime"));
                         String nameOfCategory = cursor.getString(cursor.getColumnIndexOrThrow("nameOfCategory"));
+                        String additional = cursor.getString(cursor.getColumnIndexOrThrow("additional"));
 
-                        Symptome symptome = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL);
+                        Symptome symptome = new Symptome(startOfPain, startTime, endOfPain, endTime, nameOfCategory, painLVL, additional);
                         symptomes.add(symptome);
                     } while (cursor.moveToNext());
                 }

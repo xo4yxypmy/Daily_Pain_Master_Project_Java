@@ -194,16 +194,18 @@ public class ReportFragment extends Fragment {
 
             document.add(new Paragraph("Перелік введених користувачем симптомів: "));
 
-            Table table = new Table(4);
+            Table table = new Table(5);
             Cell headerCell1 = new Cell().add(new Paragraph("№"));
             Cell headerCell2 = new Cell().add(new Paragraph("Початок"));
             Cell headerCell3 = new Cell().add(new Paragraph("Кінець"));
             Cell headerCell4 = new Cell().add(new Paragraph("Рівень болю"));
+            Cell headerCell5 = new Cell().add(new Paragraph("Додатково"));
 
             table.addCell(headerCell1);
             table.addCell(headerCell2);
             table.addCell(headerCell3);
             table.addCell(headerCell4);
+            table.addCell(headerCell5);
 
             for (int i = 0; i < symptomeList.size(); i++) {
                 Symptome symptome = symptomeList.get(i);
@@ -211,12 +213,14 @@ public class ReportFragment extends Fragment {
                 Cell cell1 = new Cell().add(new Paragraph(String.valueOf(i + 1)));
                 Cell cell2 = new Cell().add(new Paragraph(symptome.getStartOfPainTime() + " " + symptome.getStartOfPainDate()));
                 Cell cell3 = new Cell().add(new Paragraph(symptome.getEndOfPainTime() + " " + symptome.getEndOfPainDate()));
-                Cell cell4 = new Cell().add(new Paragraph(String.valueOf(symptome.getPainLvl())));
+                Cell cell4 = new Cell().add(new Paragraph(String.valueOf(Math.round(symptome.getPainLvl()))));
+                Cell cell5 = new Cell().add(new Paragraph(String.valueOf(symptome.getAdditional())));
 
                 table.addCell(cell1);
                 table.addCell(cell2);
                 table.addCell(cell3);
                 table.addCell(cell4);
+                table.addCell(cell5);
             }
 
             document.add(table);
