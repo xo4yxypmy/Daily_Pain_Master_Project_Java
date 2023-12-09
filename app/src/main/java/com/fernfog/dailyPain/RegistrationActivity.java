@@ -59,6 +59,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
 
                     startActivity(intent);
+                    finish();
 
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Не заповнено обов'язкове поле", Toast.LENGTH_LONG).show();

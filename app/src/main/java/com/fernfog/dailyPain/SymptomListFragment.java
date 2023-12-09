@@ -13,13 +13,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.fernfog.dailyPain.objects.SymptomCategory;
 import com.fernfog.dailyPain.objects.Symptome;
 import com.google.android.material.button.MaterialButton;
 
@@ -80,19 +77,15 @@ public class SymptomListFragment extends Fragment {
 
             textViewName.setTextColor(Color.parseColor("#" + dbHandler.getCategoryColorByName(symptome.getNameOfCategory())));
 
-            TextView textViewStart = new TextView(getContext());
-            textViewStart.setText(String.valueOf(symptome.getPainLvl()));
-
-            textViewStart.setLayoutParams(layoutParams);
 
 
             TextView textViewStartTime = new TextView(getContext());
-            textViewStartTime.setText(String.valueOf(symptome.getStartOfPainTime()));
+            textViewStartTime.setText(symptome.getStartOfPainDate() + " " + symptome.getStartOfPainTime());
 
             textViewStartTime.setLayoutParams(layoutParams);
 
             TextView textViewEndTime = new TextView(getContext());
-            textViewEndTime.setText(String.valueOf(symptome.getEndOfPainTime()));
+            textViewEndTime.setText(symptome.getEndOfPainDate() + " " + symptome.getEndOfPainTime());
 
             textViewEndTime.setLayoutParams(layoutParams);
 
@@ -110,22 +103,18 @@ public class SymptomListFragment extends Fragment {
                 textViewLvl.setTextColor(Color.parseColor("#FE0808"));
             }
 
-
             textViewLvl.setLayoutParams(layoutParams);
 
             Typeface customFont = ResourcesCompat.getFont(getContext(), R.font.montserrat);
             textViewName.setTypeface(customFont);
-            textViewStart.setTypeface(customFont);
             textViewLvl.setTypeface(customFont);
 
             cardContentLayout.addView(textViewName);
-            cardContentLayout.addView(textViewStart);
             cardContentLayout.addView(textViewLvl);
             cardContentLayout.addView(textViewStartTime);
             cardContentLayout.addView(textViewEndTime);
 
             textViewName.setGravity(Gravity.CENTER);
-            textViewStart.setGravity(Gravity.CENTER);
             textViewLvl.setGravity(Gravity.CENTER);
 
             MaterialButton button = new MaterialButton(getContext());

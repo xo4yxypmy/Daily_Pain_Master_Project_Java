@@ -20,8 +20,6 @@ import androidx.annotation.NonNull;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputLayout;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 
 public class AddSymptomDialog extends Dialog {
@@ -88,6 +86,7 @@ public class AddSymptomDialog extends Dialog {
 
                     dbHandler.addNewSymptom(slider.getValue(), category, startOfPain, endOfPain, startOfPainTime, endOfPainTime , additionalText);
                     Toast.makeText(getContext(), "Симптому додано!", Toast.LENGTH_LONG).show();
+                    dismiss();
                 } else {
                     Toast.makeText(getContext(), "Не заповнено обов'язкове поле", Toast.LENGTH_LONG).show();
                 }

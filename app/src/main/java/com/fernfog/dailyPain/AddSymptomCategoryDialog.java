@@ -1,10 +1,7 @@
 package com.fernfog.dailyPain;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -47,6 +44,7 @@ public class AddSymptomCategoryDialog extends Dialog {
                 if (!nameOfCategory.isEmpty()) {
                     dbHandler.addNewSymptomeCategory(nameOfCategory.trim(), colorPickerView.getColorEnvelope().getHexCode());
                     Toast.makeText(getContext(), "Категорію створено", Toast.LENGTH_LONG).show();
+                    dismiss();
                 } else {
                     Toast.makeText(getContext(), "Не заповнено обов'язкове поле", Toast.LENGTH_LONG).show();
                 }

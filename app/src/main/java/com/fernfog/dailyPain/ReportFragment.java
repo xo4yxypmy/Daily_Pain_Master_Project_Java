@@ -1,12 +1,14 @@
 package com.fernfog.dailyPain;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,10 +44,12 @@ import java.util.Locale;
 public class ReportFragment extends Fragment {
 
     Button button;
-    static Context context;
+    Context context;
     static DBHandler dbHandler;
     static List<SymptomCategory> symptomes;
     String categorySelected;
+
+    Button openFileDirectory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +71,7 @@ public class ReportFragment extends Fragment {
         symptomes = dbHandler.getAllCategoriesWithColors();
 
         List<String> symptomesNames = new ArrayList<>();
-
+        openFileDirectory = view.findViewById(R.id.openDirectoryButton);
 
         for (SymptomCategory symptome : symptomes) {
             symptomesNames.add(symptome.getName());
@@ -99,6 +103,20 @@ public class ReportFragment extends Fragment {
             }
         });
 
+        openFileDirectory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                File myPdfFolder = new File(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_DOCUMENTS), "MyPDFs");
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                Uri uri = Uri.fromFile(myPdfFolder);
+                intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, uri);
+                startActivity(intent);
+
+            }
+        });
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,8 +124,6 @@ public class ReportFragment extends Fragment {
                 generatePdf(categorySelected);
             }
         });
-
-        Log.d("SymptomesSize", String.valueOf(symptomesNames.size()));
 
         return view;
     }

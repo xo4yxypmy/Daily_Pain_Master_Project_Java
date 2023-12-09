@@ -306,10 +306,8 @@ public class DBHandler extends SQLiteOpenHelper {
         try (SQLiteDatabase db = this.getWritableDatabase()) {
             int categoryId = getCategoryIdByName(categoryName, db);
 
-            // Delete symptoms associated with the category
             db.delete("symptoms", "categoryId = ?", new String[]{String.valueOf(categoryId)});
 
-            // Delete the category
             db.delete("symptomeCategories", "nameOfSymptomCategory = ?", new String[]{categoryName});
         } catch (Exception e) {
             e.printStackTrace();
@@ -333,6 +331,16 @@ public class DBHandler extends SQLiteOpenHelper {
         }
 
         return color;
+    }
+
+    public void DELTEALLLLLLL() {
+        try (SQLiteDatabase db = this.getWritableDatabase()) {
+            db.execSQL("DELETE FROM users");
+            db.execSQL("DELETE FROM symptomeCategories");
+            db.execSQL("DELETE FROM symptoms");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static boolean checkDatabaseExists(Context context) {

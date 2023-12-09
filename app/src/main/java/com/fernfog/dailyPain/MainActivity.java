@@ -2,10 +2,12 @@ package com.fernfog.dailyPain;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -49,6 +51,21 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new AnalisFragment());
                 } else if (itemId == R.id.report) {
                     replaceFragment(new ReportFragment());
+                }
+
+                return true;
+            }
+        });
+
+        topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.settings) {
+                    Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(intent);
                 }
 
                 return true;

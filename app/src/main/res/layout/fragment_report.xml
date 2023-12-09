@@ -6,27 +6,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ReportFragment">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="240dp"
+        android:layout_height="60dp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/testBSLKFJM"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <Button
         android:id="@+id/testBSLKFJM"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@id/spinner"
+        android:text="@string/createSymptomButton"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/spinner"
+        app:layout_constraintBottom_toTopOf="@+id/openDirectoryButton" />
 
-    <Spinner
-        android:id="@+id/spinner"
+    <Button
+        android:id="@+id/openDirectoryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/openDirectoryButton"
+
+
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
         app:layout_constraintTop_toBottomOf="@id/testBSLKFJM"
-        />
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

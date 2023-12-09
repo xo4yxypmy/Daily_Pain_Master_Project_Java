@@ -66,11 +66,10 @@ public class AddSymptomCategoryFragment extends Fragment {
             cardContentLayout.setOrientation(LinearLayout.VERTICAL);
 
             cardContentLayout.setLayoutParams(new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, 250));
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             cardContentLayout.setOrientation(LinearLayout.VERTICAL);
             cardContentLayout.setGravity(Gravity.CENTER);
             cardContentLayout.setPadding(16, 16, 16, 16);
-
 
             Button buttonOpenAdd = new Button(view.getContext());
             buttonOpenAdd.setBackgroundColor(Color.parseColor("#00FFFFFF"));
@@ -92,7 +91,20 @@ public class AddSymptomCategoryFragment extends Fragment {
                 }
             });
 
+            MaterialButton deleteCategory = new MaterialButton(getContext());
+            deleteCategory.setTypeface(customFont);
+            deleteCategory.setText("Видалити категорію");
+            deleteCategory.setGravity(Gravity.CENTER);
+
+            deleteCategory.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dbHandler.deleteCategory(category.getName());
+                }
+            });
+
             cardContentLayout.addView(buttonOpenAdd);
+            cardContentLayout.addView(deleteCategory);
 
             cardView.addView(cardContentLayout);
 

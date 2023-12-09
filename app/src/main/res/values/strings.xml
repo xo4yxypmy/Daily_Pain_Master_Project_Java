@@ -17,6 +17,9 @@
     <string name="setEndTimeButton">Кінець (час)</string>
     <string name="setStartTimeButton">Початок (час)</string>
     <string name="createSymptomButton">Створити запис</string>
+    <string name="openDirectoryButton">Відкрити директорію з всіма записами</string>
+    <string name="deleteAccount">Видалити обліковий запис</string>
+    <string name="settingsText">Налаштування</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

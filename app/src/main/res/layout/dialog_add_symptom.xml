@@ -36,7 +36,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputAdditional"
-        android:layout_width="358dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Додатково"
         app:layout_constraintEnd_toEndOf="parent"
