@@ -6,16 +6,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ReportFragment">
 
+    <TextView
+        android:id="@+id/chooseCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chooseCategory"
+        android:textSize="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/spinner"
+        />
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="240dp"
         android:layout_height="60dp"
 
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@id/testBSLKFJM"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chooseCategory" />
 
     <Button
         android:id="@+id/testBSLKFJM"
@@ -23,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="@string/createSymptomButton"
+        android:text="@string/createReportButton"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

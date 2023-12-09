@@ -15,10 +15,24 @@
 
         android:textSize="30dp"
 
+        app:layout_constraintBottom_toTopOf="@id/textPainLevel"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/painSlider"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textPainLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Рівень болю:"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/painSlider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textOfCategory"
+        app:layout_constraintVertical_bias="0.761" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/painSlider"
@@ -31,8 +45,8 @@
 
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/setStartTimeButton"
-        app:layout_constraintTop_toBottomOf="@+id/textOfCategory" />
+        app:layout_constraintBottom_toTopOf="@id/textInputAdditional"
+        app:layout_constraintTop_toBottomOf="@+id/textPainLevel" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputAdditional"
@@ -41,7 +55,7 @@
         android:hint="Додатково"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/setStartTimeButton"
+        app:layout_constraintBottom_toTopOf="@id/textStart"
         app:layout_constraintTop_toBottomOf="@+id/painSlider">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -50,53 +64,85 @@
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/setStartTimeButton"
+    <TextView
+        android:id="@+id/textStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="@string/Start"
+        android:textSize="25dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textInputAdditional"
-        app:layout_constraintBottom_toTopOf="@id/setEndTimeButton"
+        app:layout_constraintBottom_toTopOf="@id/setAllStartButtons"/>
 
-        android:text="@string/setStartTimeButton" />
-
-    <Button
-        android:id="@+id/setEndTimeButton"
+    <LinearLayout
+        android:id="@+id/setAllStartButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setStartTimeButton"
-        app:layout_constraintBottom_toTopOf="@id/setStartDateButton"
+        app:layout_constraintTop_toBottomOf="@id/textStart"
+        app:layout_constraintBottom_toTopOf="@id/textEnd">
 
-        android:text="@string/setEndTimeButton" />
+        <Button
+            android:id="@+id/setStartTimeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/setTimeButton" />
 
-    <Button
-        android:id="@+id/setStartDateButton"
+        <Button
+            android:id="@+id/setStartDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/setDateButton" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        app:layout_constraintRight_toRightOf="parent"
+        android:text="@string/End"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@id/setAllEndButtons"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setEndTimeButton"
-        app:layout_constraintBottom_toTopOf="@id/setEndDateButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setAllStartButtons" />
 
-        android:text="@string/setStartDateButton" />
-
-    <Button
-        android:id="@+id/setEndDateButton"
+    <LinearLayout
+        android:id="@+id/setAllEndButtons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setStartDateButton"
-        app:layout_constraintBottom_toTopOf="@+id/createCategoryButton"
+        app:layout_constraintTop_toBottomOf="@id/setAllStartButtons"
+        app:layout_constraintBottom_toTopOf="@id/createCategoryButton">
 
-        android:text="@string/setEndDateButton" />
+        <Button
+            android:id="@+id/setEndTimeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/setTimeButton" />
+
+
+
+        <Button
+            android:id="@+id/setEndDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="@string/setDateButton" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/createCategoryButton"
@@ -104,13 +150,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/setEndDateButton"
+        android:text="@string/createSymptomButton"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
 
-        android:text="@string/createSymptomButton" />
-
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setAllEndButtons"
+        app:layout_constraintVertical_bias="0.893" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
