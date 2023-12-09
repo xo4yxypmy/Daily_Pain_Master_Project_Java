@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.fernfog.dailyPain.objects.SymptomCategory;
 import com.fernfog.dailyPain.objects.Symptome;
@@ -121,14 +122,14 @@ public class ReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                generatePdf(categorySelected);
+                generatePdf(categorySelected, view.getContext());
             }
         });
 
         return view;
     }
 
-    public static void generatePdf(String category) {
+    public static void generatePdf(String category, Context context) {
         User user = dbHandler.getUser();
 
         File pdfDirectory = new File(Environment.getExternalStoragePublicDirectory(
@@ -246,8 +247,9 @@ public class ReportFragment extends Fragment {
             document.add(new Paragraph("Інтерпретація звіту спостереження для постановки діагнозу виконується тільки лікарем."));
             document.add(new Paragraph("Згенеровано за допомогою Daily Pain."));
 
-
             document.close();
+
+            Toast.makeText(context, "Звіт створено", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
             e.printStackTrace();
